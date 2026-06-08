@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://nvnu8tde1cb7"]
+
+[ext_resource type="Shader" uid="uid://bt46epcnh8wj1" path="res://lib/hud/screen_shading/materials/shaders/vignette.gdshader" id="1_o36f6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dcyf8"]
+shader = ExtResource("1_o36f6")
+shader_parameter/position = 0.400000019
+shader_parameter/feather = 0.350000016625
+shader_parameter/alpha = 0.750000035625
+
+[node name="HUD" type="CanvasLayer" unique_id=1208028177]
+
+[node name="Vignette" type="ColorRect" parent="." unique_id=46967623]
+material = SubResource("ShaderMaterial_dcyf8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

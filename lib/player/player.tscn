@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://p561dneqr7iq"]
+
+[ext_resource type="PackedScene" uid="uid://nvnu8tde1cb7" path="res://lib/hud/hud.tscn" id="1_odf55"]
+[ext_resource type="Script" uid="uid://4gdv2245k7mb" path="res://lib/player/scripts/orbit.gd" id="2_al4t3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iochv"]
+
+[sub_resource type="Curve" id="Curve_odf55"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.08430233, 1), 0.0, 0.0, 0, 0, Vector2(0.60174423, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_al4t3"]
+curve = SubResource("Curve_odf55")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_odf55"]
+emission_shape_scale = Vector3(1, 0.5, 1)
+emission_shape = 2
+emission_sphere_radius = 3.0
+gravity = Vector3(0, 0.5, 0)
+scale_min = 0.19999999
+scale_max = 0.29999998
+alpha_curve = SubResource("CurveTexture_al4t3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_al4t3"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_2ocui"]
+material = SubResource("StandardMaterial3D_al4t3")
+size = Vector2(0.1, 0.1)
+
+[node name="Player" type="CharacterBody3D" unique_id=1756350510]
+
+[node name="HUD" parent="." unique_id=1208028177 instance=ExtResource("1_odf55")]
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=1837178040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_iochv")
+
+[node name="Orbit" type="Marker3D" parent="." unique_id=705757132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+script = ExtResource("2_al4t3")
+
+[node name="Motes" type="GPUParticles3D" parent="Orbit" unique_id=1695541971]
+cast_shadow = 0
+amount = 32
+preprocess = 5.0
+speed_scale = 0.5
+randomness = 0.5
+fixed_fps = 6
+process_material = SubResource("ParticleProcessMaterial_odf55")
+draw_pass_1 = SubResource("QuadMesh_2ocui")
+
+[node name="Camera" type="Camera3D" parent="Orbit" unique_id=420536094]
+current = true
